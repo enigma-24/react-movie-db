@@ -5,6 +5,7 @@ import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config';
 
 // components
 import HeroImage from './HeroImage';
+import Grid from './Grid';
 
 // hook
 import { useHomeFetch } from '../hooks/useHomeFetch';
@@ -14,7 +15,6 @@ import NoImage from '../images/no_image.jpg';
 
 const Home = () => {
   const { state, loading, error } = useHomeFetch();
-  console.log('state ', state);
   return (
     <Fragment>
       {state.results[0] ? (
@@ -24,6 +24,11 @@ const Home = () => {
           text={state.results[0].overview}
         />
       ) : null}
+      <Grid header='Popular Movies'>
+        {state.results.map((movie) => (
+          <div key={movie.id}>{movie.title}</div>
+        ))}
+      </Grid>
     </Fragment>
   );
 };
